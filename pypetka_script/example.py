@@ -1,7 +1,7 @@
 from pypetka_script import * #импорт всех функций
 
 '''Это пример использования PyPetka Script. 
-Все функции вы можете посмотреть в readme.md или https://github.com/IlyaChaek/PyPetka-Script или на PyPi 
+Все функции вы можете посмотреть в readme.md или https://github.com/IlyaChaek/PyPetka-Script или на https://pypi.org/project/PyPetka-Script
 Тут описана лишь часть функций, и создано для понимания синтаксиса
 '''
 # 1. Математические функции

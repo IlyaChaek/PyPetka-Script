@@ -6,7 +6,7 @@ def readme():
 
 setup(
   name='PyPetka-Script',
-  version='1.2.0',
+  version='1.3.1',
   author='Chorelin',
   author_email='miheevila6@gmail.com',
   description='Модуль для упрощения работы с Python, созданный командой PyPetka Team.',
@@ -17,8 +17,8 @@ setup(
   install_requires=[],
   classifiers=[
     'Programming Language :: Python :: 3.13',
-    'License :: OSI Approved :: MIT License',
-    'Operating System :: OS Independent'
+    'License :: None',
+    'Operating System :: Microsoft :: Windows :: Windows 10',
   ],
   keywords='Python language module PyPetka NewLanguage programming language development',
   project_urls={
