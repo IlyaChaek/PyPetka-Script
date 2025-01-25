@@ -1,28 +1,28 @@
 from setuptools import setup, find_packages
 
 def readme():
-  with open('README.md', 'r') as f:
+  with open('README.md', 'r', encoding='utf-8') as f:
     return f.read()
 
 setup(
-  name='PyPetka Script',
+  name='PyPetka-Script',
   version='1.1.0',
   author='Chorelin',
   author_email='miheevila6@gmail.com',
   description='Модуль для упрощения работы с Python, созданный командой PyPetka Team.',
   long_description=readme(),
   long_description_content_type='text/markdown',
-  url='home_link',
+  url='https://github.com/IlyaChaek/PyPetka-Script',
   packages=find_packages(),
-  install_requires=['requests>=2.25.1'],
+  install_requires=[],
   classifiers=[
-    'Programming Language :: Python :: 3.11',
+    'Programming Language :: Python :: 3.13',
     'License :: OSI Approved :: MIT License',
     'Operating System :: OS Independent'
   ],
-  keywords='example python',
+  keywords='Python language module PyPetka NewLanguage programming language development',
   project_urls={
-    'Documentation': 'link'
+    'Documentation': 'https://github.com/IlyaChaek/PyPetka-Script',
   },
-  python_requires='>=3.7'
+  python_requires='>=3.6'
 )
