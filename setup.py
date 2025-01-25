@@ -6,7 +6,7 @@ def readme():
 
 setup(
   name='PyPetka-Script',
-  version='2.4.2',
+  version='2.4.3',
   author='Chorelin',
   author_email='miheevila6@gmail.com',
   description='Модуль для упрощения работы с Python, созданный командой PyPetka Team.',
