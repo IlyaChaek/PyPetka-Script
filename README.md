@@ -40,9 +40,7 @@ from pypetka_script import pypetka_script as пипетка
 
 
 
-Более подробный пример использования различных функций [GitHub](https://github.com/IlyaChaek/PyPetka-Script/blob/main/pypetka_script/example_github.py)
-
-Более подробный пример использования различных функций [PyPi](https://github.com/IlyaChaek/PyPetka-Script/blob/main/pypetka_script/example_pypi.py)
+Более подробный пример использования различных функций [GitHub](https://github.com/IlyaChaek/PyPetka-Script/blob/main/pypetka_script/example_github.py), [PyPi](https://github.com/IlyaChaek/PyPetka-Script/blob/main/pypetka_script/example_pypi.py)
 
 #### Важно! ####
 Большая часть команд имеет аргумент внутри скобок, внизу вы можете увидеть, что нужно указать
