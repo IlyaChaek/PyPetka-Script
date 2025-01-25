@@ -79,14 +79,20 @@ def список(пользовательский_список):
 def угадай_число():
     """Игра 'Угадай число'."""
     random_number = random.randint(1, 100)
+    попытки = 0
     while True:
-        user_number = int(input('Введите число: '))
+        попытки += 1
+        try:
+            user_number = int(input('Введите число: '))
+        except ValueError:
+            вывод('Пожалуйста, введите действительное число.')
+            continue
         if user_number < random_number:
             вывод('Число меньше, чем загаданное')
         elif user_number > random_number:
             вывод('Число больше, чем загаданное')
         else:
-            вывод('Вы угадали!')
+            вывод(f'Вы угадали! Количество попыток: {попытки}')
             break
 
 def пока(условие, действие):
