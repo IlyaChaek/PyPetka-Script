@@ -5,8 +5,6 @@ import time
 import tkinter as tk
 from tkinter import ttk
 import re
-from Crypto.Cipher import AES
-from Crypto.Random import get_random_bytes
 import ast
 # 1.3.2
 def сумма(*числа):
