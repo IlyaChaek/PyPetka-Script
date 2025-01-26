@@ -1,7 +1,14 @@
 import math
 import sys
 import random
-
+import time
+import tkinter as tk
+from tkinter import ttk
+import re
+from Crypto.Cipher import AES
+from Crypto.Random import get_random_bytes
+import ast
+# 1.3.2
 def сумма(*числа):
     """Возвращает сумму переданных чисел."""
     return sum(числа)
@@ -33,7 +40,7 @@ def вывод_с_переносом_строки(*аргументы, sep=' '):
 def ввод(комментарий=None):
     """Запрашивает ввод от пользователя с опциональным комментарием."""
     return input(комментарий) if комментарий else input()
-
+# 2.4.1  
 def проверка_на_четность(число):
     """Проверяет, является ли число четным или нечетным."""
     if число % 2 == 0:
@@ -172,53 +179,9 @@ def фильтрация(список, условие):
    return [элемент for элемент in список if условие(элемент)]
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 def замена_в_списке(список, старый_элемент, новый_элемент):
    """Заменяет старый элемент на новый в списке."""
    return [новый_элемент if элемент == старый_элемент else элемент for элемент in список]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 def пересечение_списков(список1, список2):
@@ -324,12 +287,6 @@ def получить_различия(список1, список2):
 def получить_разность(список1, список2):
    """Возвращает элементы, которые есть в первом списке, но отсутствуют во втором."""
    return list(set(список1) - set(список2))
-
-
-
-
-
-
 
 
 def найти_максимум_по_ключу(список, ключ):
@@ -446,8 +403,136 @@ def сгруппировать_по_значению(список, ключ):
    return dict(grouped)
 
 
-def генератор_паролей(Длина=12):
-    """Генерирует случайный пароль заданной длины из латинских букв и цифр."""
-    import random
-    symbols = 'abcdefghijklmnopqrstuvwxyz0123456789'
+def генератор_паролей(Длина=12,маленькие_буквы=True,большие_буквы=True,цифры=True,спец_символы=True):
+    """Генерирует случайный пароль заданной длины из возможных символов."""
+    symbols = ''
+    if маленькие_буквы:
+        symbols += 'abcdefghijklmnopqrstuvwxyz'
+    if большие_буквы:
+        symbols += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    if цифры:
+        symbols += '0123456789'
+    if спец_символы:
+        symbols += '!@#$%^&*()_+-=[]{}|;:,.<>/?'
     return ''.join(random.choice(symbols) for _ in range(Длина))
+
+def генератор_рандомных_чисел(диапозон_начало, диапозон_конец):
+    """Генерирует случайное число в заданном диапазоне."""
+    import random
+    return random.randint(диапозон_начало, диапозон_конец)
+
+# 2.4.5
+
+
+def начало_кода():
+   """Запускает таймер выполнения кода, аргументы не требуются."""
+   return time.perf_counter()
+
+def конец_кода(начало):
+   """Останавливает таймер выполнения кода. Вывод времени автоматически. В аргументе требуется указать начало кода (лучше всего переменную)"""
+   end_time = time.perf_counter()
+   execution_time = end_time - начало
+   print(f"Время выполнения: {execution_time} секунд")
+
+def калькулятор_консольный():
+   """Запускает консольный калькулятор."""
+   import math
+   print("Калькулятор")
+   print("Введите выражение:")
+   expression = input()
+   try:
+       result = eval(expression)
+       print("Результат:", result)
+   except Exception as e:
+       print("Ошибка:", e)
+def калькулятор_с_интерфейсом():
+    """Запускает интерфейсный калькулятор."""
+    def calculate():
+        expression = entry.get()
+        try:
+            result = eval(expression)
+            result_label.config(text=f"Результат: {result}")
+        except Exception as e:
+            result_label.config(text=f"Ошибка: {e}")
+
+    root = tk.Tk()
+    root.title("Калькулятор")
+
+    entry = ttk.Entry(root, width=30)
+    entry.pack(pady=10)
+
+    calculate_button = ttk.Button(root, text="=", command=calculate)
+    calculate_button.pack()
+
+    result_label = ttk.Label(root, text="")
+    result_label.pack()
+
+    root.mainloop()
+
+
+def проверка_пароля_на_надежность(пароль):
+    """Проверяет надежность пароля."""
+    if len(пароль) < 8:
+        return "Пароль ненадежен, длина должна быть не менее 8 знаков"
+    if not re.search(r"\d", пароль):
+        return "Пароль ненадежен, должен содержать цифры"
+    if not re.search(r"[A-Za-z]", пароль):
+        return "Пароль ненадежен, должен содержать буквы"
+    if not re.search(r"[!@#$%^&*()_+=-{};:'<>,./?]", пароль):
+        return "Пароль ненадежен, должен содержать спецсимволы"
+    return "Пароль надежен"
+
+
+def добавить_задачу_в_файл(task):
+    """Добавляет задачу в файл."""
+    file = open('Tasks_manager_file.txt', 'a', encoding='utf-8')
+    file.write(f'\n{task}\n')
+    file.close
+def удалить_все_задачи():
+    """Удаляет все задачи из файла."""
+    i = input('Вы действительно хотите очистить спиок задач? y (Yes/Да) или n (No/Нет)\nВвод: ')
+    if i == 'y':
+        file = open('Tasks_manager_file.txt', 'w', encoding='utf-8')
+        file.write(' ')
+        file.close()
+        print('Задачи успешно удалены!')
+    elif i == 'n':
+        print('Отмена удаления списка задач')
+    else:
+        print('Некорректный ввод. Выберите y(Yes/Да) или n(No/Нет)')
+
+def проверка_простых_чисел(число):
+    """Проверяет, является ли число простым."""
+    if число <= 1:
+        return "Число не является простым"
+    for i in range(2, int(math.sqrt(число)) + 1):
+        if число % i == 0:
+            return "Число не является простым"
+    return "Число является простым"
+
+def проверка_трехзначных_чисел_на_убывающую_последовательность(число):
+    """Проверяет, являются ли цифры трехзначного числа убывающей последовательностью."""
+    if len(str(число)) != 3:
+        return "Число не трехзначное"
+    digits = sorted(str(число), reverse=True)
+    return "Цифры образуют убывающую последовательность" if digits == list(str(число)) else "Цифры не образуют убывающую последовательность"
+
+
+
+def очистка_кода_от_дубликатов(путь):
+    """Очищает код от дубликатов."""
+    with open(путь, 'r', encoding='utf-8') as file:
+        lines = file.readlines()
+
+    unique_lines = []
+    seen_lines = set()
+
+    for line in lines:
+        if line not in seen_lines:
+            unique_lines.append(line)
+            seen_lines.add(line)
+
+    cleaned_file_path = путь.replace('.py', '_cleaned.py')
+    with open(cleaned_file_path, 'w', encoding='utf-8') as file:
+        file.writelines(unique_lines)
+
